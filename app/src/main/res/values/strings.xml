@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SimpleKeyboard4</string>
+    <string name="my_keyboard">MyKeyboard</string>
+    <string name="sybtype_en_US">English (US)</string>
+</resources>
