@@ -25,6 +25,7 @@ android:keyHeight="300dp" >
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@mipmap/capitalkeysone"/>
+        android:src="@mipmap/capitalkeysone"
+    />
 </Row>
 </Keyboard>
