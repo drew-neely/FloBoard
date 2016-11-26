@@ -4,7 +4,7 @@
 android:keyWidth="300%p"
 android:horizontalGap="0px"
 android:verticalGap="0px"
-android:keyHeight="300dp" >
+android:keyHeight="300dp">
 
 <!--<Row>-->
 <!--<Key android:codes="49" android:keyLabel="1" android:keyEdgeFlags="left"/>-->
@@ -18,14 +18,16 @@ android:keyHeight="300dp" >
 <!--<Key android:codes="57" android:keyLabel="9"/>-->
 <!--<Key android:codes="48" android:keyLabel="0" android:keyEdgeFlags="right"/>-->
 <!--</Row>-->
-<Row>
-    <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysone"/>
-    <ImageView
-        android:id="@+id/keyboardLayoutType"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@mipmap/capitalkeysone"
-    />
-</Row>
+   <Row>
+       <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysone" android:adjustViewBounds="false"
+           android:rotation="90"/>  <ImageView></ImageView>
+      <!--<Key> <ImageView</ImageView></Key>-->
+   </Row>
+    <!--<ImageView-->
+        <!--android:id="@+id/keyboardLayoutType"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!---->
+        <!--android:rotation="90"-->
+        <!--/>-->
 </Keyboard>
