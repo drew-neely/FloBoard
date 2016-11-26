@@ -19,12 +19,12 @@
         <!--<Key android:codes="48" android:keyLabel="0" android:keyEdgeFlags="right"/>-->
     <!--</Row>-->
     <Row>
-        <Key android:codes="57" android:keyIcon="@mipmap/capitalkeys"/>
+        <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysthree"/>
     <ImageView
         android:id="@+id/keyboardLayoutType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@mipmap/capitalkeys1"/>
+        android:src="@mipmap/capitalkeysone"/>
     </Row>
 </Keyboard>
