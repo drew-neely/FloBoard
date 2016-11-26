@@ -19,7 +19,7 @@ android:keyHeight="300dp">
 <!--<Key android:codes="48" android:keyLabel="0" android:keyEdgeFlags="right"/>-->
 <!--</Row>-->
    <Row>
-       <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysone" android:adjustViewBounds="false"
+       <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysthree" android:adjustViewBounds="false"
            android:rotation="90"/>  <ImageView></ImageView>
       <!--<Key> <ImageView</ImageView></Key>-->
    </Row>
