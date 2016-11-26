@@ -7,8 +7,7 @@ android:verticalGap="0px"
 android:keyHeight="300dp">
 
    <Row>
-       <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysthree" android:adjustViewBounds="false"
-           android:rotation="90"/>  <ImageView></ImageView>
+       <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysthree"/>  <ImageView></ImageView>
    </Row>
 
 </Keyboard>
