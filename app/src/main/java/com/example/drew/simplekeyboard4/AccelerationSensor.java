@@ -17,15 +17,31 @@ public class AccelerationSensor extends Activity implements SensorEventListener 
     private Sensor accelerometer;
     private SensorManager SM;
 
+    private float accX, accY, accZ;
+
     public AccelerationSensor() {
         SM = (SensorManager)getSystemService(SENSOR_SERVICE);
         accelerometer = SM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
+    public float getAccX() {
+        return accX;
+    }
+
+    public float getAccY() {
+        return accY;
+    }
+
+    public float getAccZ() {
+        return accZ;
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
-        System.out.println(Arrays.toString(event.values));
-
+        accX = event.values[0];
+        accZ = event.values[2];
+        accY = event.values[1];
+        System.out.printf("%f.2 %f.2 %f.2", accX, accY, accZ);
     }
 
     @Override
