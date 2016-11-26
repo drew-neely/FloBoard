@@ -21,39 +21,39 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.util.Arrays;
+
 /**
  * Created by Drew on 11/25/2016.
  * Edited by Tyler and Shreyash on 11/25/2016.
  */
 
 public class MyKeyboard extends InputMethodService
-        implements KeyboardView.OnKeyboardActionListener, SensorEventListener {
+        implements KeyboardView.OnKeyboardActionListener {
 
 
-    private TextView xText, yText, zText;
-    private EditText firstArray, secondArray, thirdArray, fourthArray;
-    private Sensor mySensor;
-    private SensorManager SM;
-    private double xAcc, yAcc, zAcc;
-    public double xVel, yVel, zVel;
-    public double xPos, yPos, zPos;
     private double lastTime = System.currentTimeMillis();
-    boolean left, right, up, down;
-    String sentence = "";
-    int xCount, yCount;
 
 
     private KeyboardView kv;
     private Keyboard keyboard;
+    AccelerationSensor accelerationSensor = new AccelerationSensor();
 
     private boolean caps = false;
 
+    @Override
     public View onCreateInputView() {
         kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard, null);
         keyboard = new Keyboard(this, R.xml.qwerty);
         kv.setKeyboard(keyboard);
         kv.setOnKeyboardActionListener(this);
+        accelerationSensor.onResume();
         return kv;
+    }
+
+    @Override
+    public void onFinishInput() {
+        accelerationSensor.onPause();
     }
 
     private void playClick(int key) {
@@ -73,27 +73,8 @@ public class MyKeyboard extends InputMethodService
 
     @Override
     public void onKey(int primaryCode, int[] ints) {
-        InputConnection ic = getCurrentInputConnection();
-        playClick(primaryCode);
-        switch(primaryCode) {
-            case Keyboard.KEYCODE_DELETE:
-                    ic.deleteSurroundingText(1,0);
-                    break;
-            case Keyboard.KEYCODE_SHIFT:
-                    caps = !caps;
-                    keyboard.setShifted(caps);
-                    kv.invalidateAllKeys();
-                    break;
-            case Keyboard.KEYCODE_DONE:
-                ic.sendKeyEvent(new KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_ENTER));
-                break;
-            default:
-                char code = (char) primaryCode;
-                if(Character.isLetter(code) && caps) {
-                    code = Character.toUpperCase(code);
-                }
-                ic.commitText(String.valueOf(code), 1);
-        }
+        // !!! Evaluate Character
+        System.out.println("Clicked");
     }
 
     @Override
@@ -119,20 +100,5 @@ public class MyKeyboard extends InputMethodService
     @Override
     public void swipeUp() {
 
-    }
-
-    @Override
-    public void onSensorChanged(SensorEvent event) {
-        xText.setText("X " + event.values[0]);
-        xAcc =  event.values[0];
-        yText.setText("Y " + event.values[1]);
-        yAcc = event.values[1];
-        zText.setText("Z " + event.values[2]);
-        zAcc = event.values[2];
-    }
-
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-        //not used
     }
 }
