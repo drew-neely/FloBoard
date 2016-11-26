@@ -5,7 +5,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.os.Bundle;
 
 import java.util.Arrays;
 
@@ -13,16 +12,17 @@ import java.util.Arrays;
  * Created by Drew on 11/26/2016.
  */
 
-public class AccelerationSensor extends Activity implements SensorEventListener {
+public class AccelerationSensor implements SensorEventListener {
 
     private Sensor accelerometer;
     private SensorManager SM;
 
     private float accX, accY, accZ;
 
-    public AccelerationSensor() {
-        SM = (SensorManager)getSystemService(SENSOR_SERVICE);
+    public AccelerationSensor(SensorManager SM) {
+        this.SM = SM;
         accelerometer = SM.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        SM.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     public float getAccX() {
@@ -42,19 +42,7 @@ public class AccelerationSensor extends Activity implements SensorEventListener 
         accX = event.values[0];
         accZ = event.values[2];
         accY = event.values[1];
-        System.out.printf("%f.2 %f.2 %f.2", accX, accY, accZ);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SM.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        SM.unregisterListener(this);
+        System.out.printf("%.2f %.2f %.2f%n", accX, accY, accZ);
     }
 
     @Override

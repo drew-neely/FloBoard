@@ -1,5 +1,6 @@
 package com.example.drew.simplekeyboard4;
 
+import android.hardware.SensorManager;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.Keyboard;
@@ -23,18 +24,20 @@ public class MyKeyboard extends InputMethodService
 
     @Override
     public View onCreateInputView() {
+        System.out.println("onCreateInputViewCalled");
         kv = (KeyboardView) getLayoutInflater().inflate(R.layout.keyboard, null);
         keyboard = new Keyboard(this, R.xml.qwerty);
         kv.setKeyboard(keyboard);
         kv.setOnKeyboardActionListener(this);
-        accelerationSensor = new AccelerationSensor();
-        accelerationSensor.onResume();
+        if(accelerationSensor == null) {
+            accelerationSensor = new AccelerationSensor((SensorManager)getSystemService(SENSOR_SERVICE));
+        }
         return kv;
     }
 
     @Override
     public void onFinishInput() {
-        accelerationSensor.onPause();
+
     }
 
     private void playClick(int key) {
