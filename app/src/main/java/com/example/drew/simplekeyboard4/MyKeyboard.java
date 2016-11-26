@@ -7,12 +7,41 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
 
+import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.hardware.Sensor;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorEvent;
+import android.hardware.SensorManager;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 /**
  * Created by Drew on 11/25/2016.
+ * Edited by Tyler and Shreyash on 11/25/2016.
  */
 
 public class MyKeyboard extends InputMethodService
-        implements KeyboardView.OnKeyboardActionListener {
+        implements KeyboardView.OnKeyboardActionListener, SensorEventListener {
+
+
+    private TextView xText, yText, zText;
+    private EditText firstArray, secondArray, thirdArray, fourthArray;
+    private Sensor mySensor;
+    private SensorManager SM;
+    private double xAcc, yAcc, zAcc;
+    public double xVel, yVel, zVel;
+    public double xPos, yPos, zPos;
+    private double lastTime = System.currentTimeMillis();
+    boolean left, right, up, down;
+    String sentence = "";
+    int xCount, yCount;
+
 
     private KeyboardView kv;
     private Keyboard keyboard;
@@ -90,5 +119,20 @@ public class MyKeyboard extends InputMethodService
     @Override
     public void swipeUp() {
 
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        xText.setText("X " + event.values[0]);
+        xAcc =  event.values[0];
+        yText.setText("Y " + event.values[1]);
+        yAcc = event.values[1];
+        zText.setText("Z " + event.values[2]);
+        zAcc = event.values[2];
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+        //not used
     }
 }
