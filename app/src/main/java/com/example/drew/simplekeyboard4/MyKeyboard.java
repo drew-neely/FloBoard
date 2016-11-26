@@ -22,6 +22,12 @@ public class MyKeyboard extends InputMethodService
 
     private boolean caps = false;
 
+    public char determineCharacter(char[] alphabet) {
+        float accX = accelerationSensor.getAccX();
+
+        return 'a';
+    }
+
     @Override
     public View onCreateInputView() {
         System.out.println("onCreateInputViewCalled");
