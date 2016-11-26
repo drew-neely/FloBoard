@@ -19,7 +19,7 @@
         <!--<Key android:codes="48" android:keyLabel="0" android:keyEdgeFlags="right"/>-->
     <!--</Row>-->
     <Row>
-        <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysthree"/>
+        <Key android:codes="57" android:keyIcon="@mipmap/capitalkeysone"/>
     <ImageView
         android:id="@+id/keyboardLayoutType"
         android:layout_width="wrap_content"
