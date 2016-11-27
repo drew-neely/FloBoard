@@ -1,4 +1,4 @@
-                                                  Purpose of Floboard
+                                                 **Purpose of Floboard**
     
          Floboard is made for the purpose of assisting people with fine motor control disorders and those 
     experiencing symptoms often associated with movement disorders and head injuries that include hand tremors 
