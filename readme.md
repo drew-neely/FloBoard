@@ -1,5 +1,6 @@
                                                   Purpose of Floboard
-         This application is made for the purpose of assisting people with fine motor control disorders and those 
+    
+         Floboard is made for the purpose of assisting people with fine motor control disorders and those 
     experiencing symptoms often associated with movement disorders and head injuries that include hand tremors 
     and dexterity issues. The intention was to enable those with various disorders and diseases such as but not
     limited to multiple sclerosis, hyperthyroidism, Parkinson's disease, and rheumatoid arthritis with the ability 
