@@ -90,6 +90,10 @@ public class AccelerationSensor implements SensorEventListener {
         return accZ;
     }
 
+    public double getTheta(){
+        return theta;
+    }
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         accX = event.values[0];

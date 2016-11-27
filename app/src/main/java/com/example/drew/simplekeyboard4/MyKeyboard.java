@@ -1,11 +1,16 @@
 package com.example.drew.simplekeyboard4;
 
+import android.content.res.Resources;
 import android.hardware.SensorManager;
 import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.Keyboard;
 import android.view.View;
 import android.view.inputmethod.InputConnection;
+
+import java.util.List;
+
+import static com.example.drew.simplekeyboard4.R.attr.theme;
 
 
 /**
@@ -34,9 +39,9 @@ public class MyKeyboard extends InputMethodService
         if(accelerationSensor == null) {
             accelerationSensor = new AccelerationSensor((SensorManager)getSystemService(SENSOR_SERVICE));
         }
-        kv.setRotation(90);
         return kv;
     }
+
 
     @Override
     public void onFinishInput() {
@@ -49,7 +54,24 @@ public class MyKeyboard extends InputMethodService
 
 
     @Override
-    public void onPress(int i) {
+    public void onPress(int primaryCode) {
+
+        Keyboard currentKeyboard = kv.getKeyboard();
+        List<Keyboard.Key> keys = currentKeyboard.getKeys();
+        kv.invalidateKey(primaryCode);//tells phone to repaint key
+
+        for(int i = 0; i < keys.size(); i++ )
+        {
+            Keyboard.Key currentKey = keys.get(i);
+
+            //?????codes is the unicode for the key
+            if(currentKey.codes[0] == primaryCode)
+            {
+                currentKey.label = null;
+                currentKey.icon = getResources().getDrawable( R.layout.keyboard, /theme);//!!!!!!!!!  NEEDS FIXING ASAP  looks for Drawable to put as new keyIcon
+                break; // leave the loop once you find your match
+            }
+        }
 
     }
 
