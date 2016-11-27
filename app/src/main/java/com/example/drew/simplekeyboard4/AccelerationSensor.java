@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,9 +23,13 @@ public class AccelerationSensor implements SensorEventListener {
     private long updatePeriod = 15;
     private double speed = .005 * updatePeriod;
     private double minMoveAcc = 2;
+    final public double minShakeAcc = 20;
     private double theta = 0;
+    private boolean inShake = false;
+    private long lastShakeTime = (new Date()).getTime();
+    final public long minShakeDelay = 300;
 
-    private float accX, accY, accZ;
+    private float accX, accY, accZ, totalAcc;
 
     public AccelerationSensor(SensorManager SM) {
         this.SM = SM;
@@ -36,6 +41,7 @@ public class AccelerationSensor implements SensorEventListener {
             @Override
             public void run() {
                 updateTheta();
+                checkForShake();
             }
 
         } , 0 , updatePeriod);
@@ -90,8 +96,30 @@ public class AccelerationSensor implements SensorEventListener {
         return accZ;
     }
 
+    public float getTotalAcc() {
+        return totalAcc;
+    }
+
     public double getTheta(){
         return theta;
+    }
+
+    private void checkForShake() {
+        if(totalAcc > minShakeAcc) {
+            inShake = true;
+        } else {
+            inShake = false;
+        }
+    }
+
+    public boolean doShake() {
+        if(inShake && (new Date()).getTime() - lastShakeTime > minShakeDelay) {
+            lastShakeTime = (new Date()).getTime();
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     @Override
@@ -99,7 +127,9 @@ public class AccelerationSensor implements SensorEventListener {
         accX = event.values[0];
         accY = event.values[1];
         accZ = event.values[2];
-        System.out.println("Letter = " + determineCharacter(MyKeyboard.alphabets[0]) + " ::: theta = " + theta + " ::: accX = " + accX);
+        totalAcc = (float) Math.sqrt(accX*accX + accY*accY + accZ*accZ);
+        System.out.println("Letter = " + determineCharacter(MyKeyboard.alphabets[0]) + " ::: theta = " + theta
+                + " ::: accX = " + accX + " ::: totalAcc = " + totalAcc);
     }
 
     @Override
