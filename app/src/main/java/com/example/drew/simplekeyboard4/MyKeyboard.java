@@ -5,6 +5,7 @@ import android.inputmethodservice.InputMethodService;
 import android.inputmethodservice.KeyboardView;
 import android.inputmethodservice.Keyboard;
 import android.view.View;
+import android.view.inputmethod.InputConnection;
 
 
 /**
@@ -20,13 +21,8 @@ public class MyKeyboard extends InputMethodService
     private Keyboard keyboard;
     AccelerationSensor accelerationSensor;
 
-    private boolean caps = false;
-
-    public char determineCharacter(char[] alphabet) {
-        float accX = accelerationSensor.getAccX();
-
-        return 'a';
-    }
+    static char[][] alphabets = {{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'},
+        {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'}};
 
     @Override
     public View onCreateInputView() {
@@ -38,6 +34,7 @@ public class MyKeyboard extends InputMethodService
         if(accelerationSensor == null) {
             accelerationSensor = new AccelerationSensor((SensorManager)getSystemService(SENSOR_SERVICE));
         }
+        kv.setRotation(90);
         return kv;
     }
 
@@ -63,8 +60,8 @@ public class MyKeyboard extends InputMethodService
 
     @Override
     public void onKey(int primaryCode, int[] ints) {
-        // !!! Evaluate Character
-        System.out.println("Clicked");
+        InputConnection ic = getCurrentInputConnection();
+        ic.commitText(String.valueOf(accelerationSensor.determineCharacter(alphabets[0])), 1);
     }
 
     @Override
